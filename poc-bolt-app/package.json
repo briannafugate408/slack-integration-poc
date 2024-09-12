@@ -1,0 +1,27 @@
+{
+  "name": "poc-bolt-app",
+  "version": "1.0.0",
+  "description": "proof of concept slack integration",
+  "main": "app.js",
+  "scripts": {
+    "test": "test slack integration"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/briannafugate408/slack-integration-poc.git"
+  },
+  "keywords": [
+    "slack",
+    "integration"
+  ],
+  "author": "brianna fugate",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/briannafugate408/slack-integration-poc/issues"
+  },
+  "homepage": "https://github.com/briannafugate408/slack-integration-poc#readme",
+  "dependencies": {
+    "@slack/bolt": "^3.21.4"
+  }
+}

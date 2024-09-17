@@ -38,6 +38,42 @@ async function publishMessage(id) {
         ]
       // You could also use a blocks[] array to send richer content
     });
+      console.log(result.ts);
+      putEmoji(result.ts);
+      respondInThread(testChannelId, result.ts, "This is a thread");
+  } catch (error) {
+    console.error("ERROR", error);
+  }
+}
+
+async function putEmoji(timestamp) {
+    try {
+        console.log("putEmoji, timestamp: ", timestamp);
+        // Call the chat.postMessage method using the built-in WebClient
+        const result = await app.client.reactions.add({
+        // The token you used to initialize your app
+        token: app.token,
+        channel: testChannelId,
+        name: "thumbsup",
+        timestamp,
+        
+        });
+        console.log(result);
+    } catch (error) {
+        console.error("ERROR", error);
+    }
+    
+}
+
+async function respondInThread(channel, thread_ts, text) {
+  try {
+    const result = await app.client.chat.postMessage({
+      // The token you used to initialize your app
+      token: app.token,
+      channel,
+      thread_ts,
+      text,
+    });
     console.log(result);
   } catch (error) {
     console.error("ERROR", error);
@@ -50,5 +86,5 @@ async function publishMessage(id) {
   await app.start(process.env.PORT || 3000);
   console.log("⚡️ Bolt app is running!");
 
-  publishMessage(testChannelId);
+    const timestamp = await publishMessage(testChannelId);
 })();

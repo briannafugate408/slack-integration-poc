@@ -12,7 +12,7 @@ const app = new App({
 
 const testChannelId = "C07LL5AG9V5";
 
-async function publishMessage(id) {
+async function publishMessage(id, data) {
   try {
     // Call the chat.postMessage method using the built-in WebClient
     const result = await app.client.chat.postMessage({
@@ -28,7 +28,7 @@ async function publishMessage(id) {
                 "elements": [
                   {
                     "type": "text",
-                    "text": JSON.stringify(sample, null, 2),
+                    "text": JSON.stringify(data, null, 2),
                   },
                 ],
                 "border": 0
@@ -80,11 +80,10 @@ async function respondInThread(channel, thread_ts, text) {
   }
 }
 
-// When a user joins the team, send a message in a predefined channel asking them to introduce themselves
 (async () => {
   // Start your app
   await app.start(process.env.PORT || 3000);
   console.log("⚡️ Bolt app is running!");
 
-    const timestamp = await publishMessage(testChannelId);
+  await publishMessage(testChannelId, data);
 })();

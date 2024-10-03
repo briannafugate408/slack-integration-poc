@@ -16,3 +16,4 @@ How to Run:
 - Run partner api rest server
 - Run python server (Slack API)
 - Run main python app with `python3 main.py --hmac_secret "yoyoyo" --customer custom --portion_type multiplier`
+- Make sure the webhook URL in app is correct for the app you want message sent to

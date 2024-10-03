@@ -9,11 +9,16 @@ import hashlib
 import base64
 import json
 import math
+import urllib3
+
 
 import pandas as pd
 
 from datetime import datetime
 from partner_api import generate_list_of_entrees
+from server import app
+
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 def call_partner_api_with_payload(entree_payload, api_route, hmac_secret_key):
     try:
@@ -35,8 +40,17 @@ def call_partner_api_with_payload(entree_payload, api_route, hmac_secret_key):
         print(f"Successfully submitted order with ID {orderId} to the API {api_route}")
         print("Order Payload:", entree_payload)
         print("\n\n")
+        trigger_send_message(entree_payload)
     except requests.exceptions.HTTPError as err:
         print("There was an error submitting the order:", err)
+
+def trigger_send_message(message):
+    # Simulating a request to the send_message route
+    print(f"Triggering send_message with message: {message}")
+    with app.test_client() as client:
+        response = client.post('/send-message', json={'message': message})
+        return response
+
 
 def main():
     # Add the CLI arguments support
